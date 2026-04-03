@@ -1,0 +1,32 @@
+---
+import { getInsuranceTypesForBusiness } from '../../lib/data';
+import type { BusinessType, State } from '../../lib/data';
+
+interface Props {
+  business: BusinessType;
+  state: State;
+}
+
+const { business, state } = Astro.props;
+const insuranceTypes = getInsuranceTypesForBusiness(business);
+const utmParams = `?utm_source=bizformation&utm_medium=cta&utm_campaign=${business.slug}-${state.slug}`;
+---
+
+<div class="my-8 p-6 bg-accent-50 border border-accent-200 rounded-lg">
+  <h3 class="text-xl font-bold mb-2">Get {business.name} Insurance in {state.name}</h3>
+  <ul class="text-sm text-gray-700 space-y-1 mb-4">
+    {insuranceTypes.slice(0, 3).map((ins) => (
+      <li class="flex items-start gap-1">
+        <span class="text-accent-600">&#10003;</span>
+        {ins.name} — {ins.description.toLowerCase()}
+      </li>
+    ))}
+  </ul>
+  <p class="text-xs text-gray-500 mb-4">Compare quotes from top insurers. No obligation.</p>
+  <a
+    href={`/insurance/${business.slug}/${state.slug}/${utmParams}`}
+    class="inline-block px-6 py-3 bg-accent-600 text-white font-medium rounded-md hover:bg-accent-700 transition-colors"
+  >
+    Get Free Quotes
+  </a>
+</div>

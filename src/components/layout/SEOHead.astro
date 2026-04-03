@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  schemas?: object[];
+}
+
+const { title, description, canonicalUrl, schemas = [] } = Astro.props;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="article" />
+<meta property="og:url" content={canonicalUrl} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

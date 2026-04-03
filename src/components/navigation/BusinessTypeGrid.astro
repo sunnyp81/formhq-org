@@ -1,0 +1,43 @@
+---
+import { getAllBusinessTypes } from '../../lib/data';
+import type { State } from '../../lib/data';
+
+interface Props {
+  state?: State;
+  linkPrefix?: string;
+}
+
+const { state, linkPrefix = '/start' } = Astro.props;
+const businessTypes = getAllBusinessTypes();
+const grouped = businessTypes.reduce<Record<string, typeof businessTypes>>((acc, bt) => {
+  if (!acc[bt.category]) acc[bt.category] = [];
+  acc[bt.category].push(bt);
+  return acc;
+}, {});
+---
+
+<section class="my-10">
+  <h2 class="text-2xl font-bold mb-6">
+    {state ? `Start a Business in ${state.name}` : 'Browse Business Types'}
+  </h2>
+  {Object.entries(grouped).map(([category, types]) => (
+    <div class="mb-8">
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">{category}</h3>
+      <nav aria-label={`${category} business types`}>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          {types.map((bt) => (
+            <li>
+              <a
+                href={state ? `${linkPrefix}/${bt.slug}/${state.slug}/` : `${linkPrefix}/${bt.slug}/`}
+                class="block p-4 rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
+              >
+                <span class="font-medium text-primary-700">{bt.name}</span>
+                <p class="text-sm text-gray-500 mt-1">{bt.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  ))}
+</section>

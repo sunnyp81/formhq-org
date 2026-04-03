@@ -1,0 +1,40 @@
+---
+import { getLLCProviders, getLLCProviderUrl, formatCurrency } from '../../lib/data';
+import type { State } from '../../lib/data';
+
+interface Props {
+  state: State;
+}
+
+const { state } = Astro.props;
+const topPick = getLLCProviders().find((p) => p.isTopPick);
+---
+
+{topPick && (
+  <div class="my-8 p-6 bg-primary-50 border border-primary-200 rounded-lg">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="px-2 py-0.5 bg-accent-500 text-white text-xs font-bold rounded">Top Pick</span>
+      <span class="font-bold text-lg">{topPick.name}</span>
+    </div>
+    <p class="text-3xl font-bold text-primary-700 mb-2">
+      {formatCurrency(topPick.basePrice + state.llcFilingFee)}
+      <span class="text-sm font-normal text-gray-500">total to form your {state.abbr} LLC</span>
+    </p>
+    <ul class="text-sm text-gray-700 space-y-1 mb-4">
+      {topPick.features.map((f) => (
+        <li class="flex items-start gap-1">
+          <span class="text-accent-500">&#10003;</span>
+          {f}
+        </li>
+      ))}
+    </ul>
+    <a
+      href={getLLCProviderUrl(topPick, state.abbr)}
+      target="_blank"
+      rel="nofollow sponsored noopener noreferrer"
+      class="inline-block px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors"
+    >
+      Form Your LLC with {topPick.name}
+    </a>
+  </div>
+)}

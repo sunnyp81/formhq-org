@@ -1,0 +1,39 @@
+---
+import { formatCurrency, formatCostRange } from '../../lib/data';
+import type { State, BusinessType, BusinessStateEntry } from '../../lib/data';
+
+interface Props {
+  business: BusinessType;
+  state: State;
+  data?: BusinessStateEntry;
+}
+
+const { business, state, data } = Astro.props;
+const costRange = data?.estimatedTotalCost ?? business.startupCostRange;
+---
+
+<section class="my-10">
+  <h2 class="text-2xl font-bold mb-6">Startup Costs in {state.name}</h2>
+  <div class="bg-gray-50 rounded-lg p-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-white rounded-md p-4 border border-gray-200">
+        <p class="text-sm text-gray-500">LLC Filing Fee</p>
+        <p class="text-2xl font-bold text-primary-700">{formatCurrency(state.llcFilingFee)}</p>
+      </div>
+      <div class="bg-white rounded-md p-4 border border-gray-200">
+        <p class="text-sm text-gray-500">Annual Report Fee</p>
+        <p class="text-2xl font-bold text-primary-700">
+          {state.annualReportFee > 0 ? formatCurrency(state.annualReportFee) : 'None'}
+        </p>
+      </div>
+      <div class="bg-white rounded-md p-4 border border-gray-200">
+        <p class="text-sm text-gray-500">State Income Tax</p>
+        <p class="text-2xl font-bold text-primary-700">{state.hasStateIncomeTax ? 'Yes' : 'None'}</p>
+      </div>
+      <div class="bg-white rounded-md p-4 border border-gray-200">
+        <p class="text-sm text-gray-500">Estimated Total Startup</p>
+        <p class="text-2xl font-bold text-accent-600">{formatCostRange(costRange)}</p>
+      </div>
+    </div>
+  </div>
+</section>

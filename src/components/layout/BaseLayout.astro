@@ -1,0 +1,44 @@
+---
+import '../../styles/global.css';
+import SEOHead from './SEOHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  schemas?: object[];
+}
+
+const { title, description, canonicalUrl, schemas = [] } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <SEOHead title={title} description={description} canonicalUrl={canonicalUrl} schemas={schemas} />
+  </head>
+  <body>
+    <header class="bg-white border-b border-gray-200">
+      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold text-primary-700">Business Formation Guide</a>
+        <ul class="flex gap-6 text-sm font-medium text-gray-600">
+          <li><a href="/start/" class="hover:text-primary-600">Start a Business</a></li>
+          <li><a href="/llc/" class="hover:text-primary-600">Form an LLC</a></li>
+          <li><a href="/insurance/" class="hover:text-primary-600">Insurance</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-gray-50 border-t border-gray-200 mt-16 py-12">
+      <div class="max-w-6xl mx-auto px-4 text-sm text-gray-500">
+        <p>&copy; {new Date().getFullYear()} Business Formation Guide. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

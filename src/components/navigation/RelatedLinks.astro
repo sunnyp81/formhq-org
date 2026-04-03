@@ -1,0 +1,66 @@
+---
+import { getAllBusinessTypes, getInsuranceTypesForBusiness } from '../../lib/data';
+import type { BusinessType, State } from '../../lib/data';
+
+interface Props {
+  business?: BusinessType;
+  state?: State;
+  pageType: 'business-hub' | 'state-spoke' | 'insurance-spoke' | 'llc-spoke';
+}
+
+const { business, state, pageType } = Astro.props;
+
+const allBusinessTypes = getAllBusinessTypes();
+const otherBusinessTypes = business
+  ? allBusinessTypes.filter((bt) => bt.slug !== business.slug).slice(0, 5)
+  : allBusinessTypes.slice(0, 5);
+
+const insuranceTypes = business ? getInsuranceTypesForBusiness(business) : [];
+---
+
+<aside class="my-10 p-6 bg-gray-50 rounded-lg">
+  {pageType === 'state-spoke' && state && (
+    <div class="mb-6">
+      <h3 class="font-semibold text-lg mb-3">Other Businesses in {state.name}</h3>
+      <ul class="space-y-2">
+        {otherBusinessTypes.map((bt) => (
+          <li>
+            <a href={`/start/${bt.slug}/${state.slug}/`} class="text-primary-600 hover:underline text-sm">
+              Start a {bt.name} in {state.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {pageType === 'insurance-spoke' && business && (
+    <div class="mb-6">
+      <h3 class="font-semibold text-lg mb-3">Other Insurance for {business.name}</h3>
+      <ul class="space-y-2">
+        {insuranceTypes.map((ins) => (
+          <li>
+            <a href={`/insurance/${business.slug}/${state?.slug}/`} class="text-primary-600 hover:underline text-sm">
+              {ins.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {pageType === 'llc-spoke' && state && (
+    <div>
+      <h3 class="font-semibold text-lg mb-3">Start a Business in {state.name}</h3>
+      <ul class="space-y-2">
+        {allBusinessTypes.map((bt) => (
+          <li>
+            <a href={`/start/${bt.slug}/${state.slug}/`} class="text-primary-600 hover:underline text-sm">
+              Start a {bt.name} in {state.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</aside>
