@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "zenbusiness",
+    "name": "ZenBusiness",
+    "basePrice": 0,
+    "paidTier": 199,
+    "features": ["Free registered agent (1 year)", "Operating agreement template", "EIN filing included"],
+    "rating": 4.8,
+    "affiliateUrlTemplate": "https://zenbusiness.com/?ref=TRACKING&state={state}",
+    "isTopPick": true
+  },
+  {
+    "slug": "northwest",
+    "name": "Northwest Registered Agent",
+    "basePrice": 39,
+    "paidTier": 225,
+    "features": ["Free registered agent (1 year)", "Privacy by default", "Local corporate guides"],
+    "rating": 4.7,
+    "affiliateUrlTemplate": "https://www.northwestregisteredagent.com/?ref=TRACKING&state={state}",
+    "isTopPick": false
+  },
+  {
+    "slug": "incfile",
+    "name": "Incfile",
+    "basePrice": 0,
+    "paidTier": 199,
+    "features": ["Free registered agent (1 year)", "Tax consultation included", "Compliance alerts"],
+    "rating": 4.6,
+    "affiliateUrlTemplate": "https://www.incfile.com/?ref=TRACKING&state={state}",
+    "isTopPick": false
+  }
+]

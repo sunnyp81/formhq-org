@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "texas",
+    "name": "Texas",
+    "abbr": "TX",
+    "llcFilingFee": 300,
+    "annualReportFee": 0,
+    "hasStateIncomeTax": false,
+    "businessRegistrationUrl": "https://www.sos.state.tx.us/corp/forms_702.shtml",
+    "sosName": "Texas Secretary of State",
+    "requiresRegisteredAgent": true,
+    "insuranceMinimums": {
+      "general-liability": 500000,
+      "workers-comp": "required-with-employees"
+    }
+  },
+  {
+    "slug": "california",
+    "name": "California",
+    "abbr": "CA",
+    "llcFilingFee": 70,
+    "annualReportFee": 800,
+    "hasStateIncomeTax": true,
+    "businessRegistrationUrl": "https://www.sos.ca.gov/business-programs/business-entities",
+    "sosName": "California Secretary of State",
+    "requiresRegisteredAgent": true,
+    "insuranceMinimums": {
+      "general-liability": 1000000,
+      "workers-comp": "required-with-employees"
+    }
+  },
+  {
+    "slug": "florida",
+    "name": "Florida",
+    "abbr": "FL",
+    "llcFilingFee": 125,
+    "annualReportFee": 138,
+    "hasStateIncomeTax": false,
+    "businessRegistrationUrl": "https://dos.fl.gov/sunbiz/start-business",
+    "sosName": "Florida Division of Corporations",
+    "requiresRegisteredAgent": true,
+    "insuranceMinimums": {
+      "general-liability": 500000,
+      "workers-comp": "required-4-or-more-employees"
+    }
+  }
+]

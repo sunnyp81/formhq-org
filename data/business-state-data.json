@@ -1,0 +1,80 @@
+{
+  "cleaning-business:texas": {
+    "specificLicenses": ["No state license required", "Local business permit may apply"],
+    "estimatedTotalCost": [500, 2500],
+    "steps": [
+      { "order": 1, "title": "Choose your business structure", "description": "Most cleaning businesses in Texas operate as an LLC for liability protection. An LLC separates your personal assets from business debts." },
+      { "order": 2, "title": "Register with the Texas Secretary of State", "description": "File a Certificate of Formation with the TX SOS. The filing fee is $300. You can file online through SOSDirect." },
+      { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply for a free Employer Identification Number at irs.gov. You need this to open a business bank account and hire employees." },
+      { "order": 4, "title": "Open a business bank account", "description": "Keep personal and business finances separate. Most banks require your Certificate of Formation and EIN." },
+      { "order": 5, "title": "Get general liability insurance", "description": "Texas recommends at least $500,000 in general liability coverage. Many commercial clients require proof of insurance before hiring." },
+      { "order": 6, "title": "Purchase equipment and supplies", "description": "Basic cleaning supplies and equipment cost $500-$2,000. Start with essentials and upgrade as you grow." }
+    ],
+    "stateSpecificNotes": "Texas has no state income tax, which means more of your cleaning business revenue stays in your pocket. No specific state license is required for residential cleaning, but commercial cleaning contracts may require additional certifications."
+  },
+  "cleaning-business:california": {
+    "specificLicenses": ["City business license required", "Seller's permit if selling products"],
+    "estimatedTotalCost": [1000, 4000],
+    "steps": [
+      { "order": 1, "title": "Choose your business structure", "description": "California LLCs offer strong liability protection. Note that California charges an $800 annual franchise tax regardless of income." },
+      { "order": 2, "title": "File with the California Secretary of State", "description": "File Articles of Organization with the CA SOS. The filing fee is $70 — one of the lowest in the nation." },
+      { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply for a free Employer Identification Number at irs.gov. Required for taxes, banking, and hiring." },
+      { "order": 4, "title": "Register with the California Franchise Tax Board", "description": "All California LLCs must register with the FTB and pay the $800 minimum franchise tax annually." },
+      { "order": 5, "title": "Get your city business license", "description": "California requires a business license from your city or county. Fees and requirements vary by location." },
+      { "order": 6, "title": "Get general liability insurance", "description": "California recommends at least $1,000,000 in general liability coverage. Workers' comp is required if you have employees." }
+    ],
+    "stateSpecificNotes": "California has the largest market for cleaning services in the US, but higher costs. The $800 annual franchise tax applies even if your LLC earns no income. Factor this into your budget before forming."
+  },
+  "cleaning-business:florida": {
+    "specificLicenses": ["No state license required", "Local business tax receipt required"],
+    "estimatedTotalCost": [500, 3000],
+    "steps": [
+      { "order": 1, "title": "Choose your business structure", "description": "An LLC is the most popular choice for Florida cleaning businesses. It provides personal liability protection and tax flexibility." },
+      { "order": 2, "title": "File with the Florida Division of Corporations", "description": "File Articles of Organization with Florida DOS. The filing fee is $125, filed online through Sunbiz.org." },
+      { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply for a free Employer Identification Number at irs.gov. Needed for banking and tax purposes." },
+      { "order": 4, "title": "Get your local business tax receipt", "description": "Most Florida counties require a business tax receipt (formerly called an occupational license). Fees typically range from $25-$100." },
+      { "order": 5, "title": "Get general liability insurance", "description": "Florida recommends at least $500,000 in general liability coverage. Workers' comp is required with 4 or more employees." },
+      { "order": 6, "title": "Open a business bank account", "description": "Bring your Articles of Organization and EIN to open a dedicated business account." }
+    ],
+    "stateSpecificNotes": "Florida has no state income tax and a business-friendly regulatory environment. The annual report fee of $138.75 is due by May 1st each year. Late filing incurs a $400 penalty."
+  },
+  "landscaping-business:texas": {
+    "specificLicenses": ["Pesticide applicator license (if applying chemicals)", "Local permits for irrigation work"],
+    "estimatedTotalCost": [3000, 15000],
+    "steps": [
+      { "order": 1, "title": "Choose your business structure", "description": "An LLC protects your personal assets from landscaping liability claims — important given the physical nature of the work." },
+      { "order": 2, "title": "Register with the Texas Secretary of State", "description": "File a Certificate of Formation with the TX SOS. The filing fee is $300." },
+      { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply at irs.gov. Required for hiring employees, which most landscaping businesses do quickly." },
+      { "order": 4, "title": "Get a pesticide applicator license", "description": "If you plan to apply herbicides or pesticides, you need a license from the Texas Department of Agriculture. Requires passing an exam." },
+      { "order": 5, "title": "Get commercial auto and liability insurance", "description": "Texas requires at least $500,000 in general liability. You also need commercial auto insurance for work trucks and trailers." },
+      { "order": 6, "title": "Purchase equipment", "description": "Basic landscaping equipment (mower, trimmer, blower, trailer) costs $5,000-$15,000. Consider leasing to reduce upfront costs." }
+    ],
+    "stateSpecificNotes": "Texas has a long growing season (March-November in most regions), meaning more months of revenue than northern states. No state income tax keeps more profit in your business. The pesticide applicator license is only needed if you offer chemical treatments."
+  },
+  "landscaping-business:california": {
+    "specificLicenses": ["C-27 Landscaping Contractor License (projects over $500)", "Pesticide applicator license"],
+    "estimatedTotalCost": [5000, 20000],
+    "steps": [
+      { "order": 1, "title": "Choose your business structure", "description": "California LLCs provide liability protection essential for landscaping work. Note the $800 annual franchise tax." },
+      { "order": 2, "title": "File with the California Secretary of State", "description": "File Articles of Organization. The filing fee is $70." },
+      { "order": 3, "title": "Get your C-27 Contractor License", "description": "California requires a C-27 Landscaping Contractor license from CSLB for any project over $500. Requires 4 years of experience and passing a trade exam." },
+      { "order": 4, "title": "Get your EIN and register with FTB", "description": "Get your EIN from IRS, then register with the California Franchise Tax Board for the $800 annual minimum tax." },
+      { "order": 5, "title": "Get insurance", "description": "California requires $1,000,000 in general liability for licensed contractors. Workers' comp is mandatory if you have any employees." },
+      { "order": 6, "title": "Purchase or lease equipment", "description": "Budget $10,000-$20,000 for professional-grade equipment. Water-efficient landscaping equipment is increasingly important due to California drought regulations." }
+    ],
+    "stateSpecificNotes": "California's year-round growing season makes it the largest landscaping market in the US. The C-27 contractor license requirement is a significant barrier to entry — plan 4+ years of experience before applying. Drought-resistant landscaping (xeriscaping) is a growing niche."
+  },
+  "landscaping-business:florida": {
+    "specificLicenses": ["Limited certification for pest control (if applicable)", "Local business tax receipt"],
+    "estimatedTotalCost": [3000, 12000],
+    "steps": [
+      { "order": 1, "title": "Choose your business structure", "description": "An LLC is recommended for landscaping in Florida due to the physical risks and property damage potential." },
+      { "order": 2, "title": "File with the Florida Division of Corporations", "description": "File Articles of Organization online through Sunbiz.org. Filing fee is $125." },
+      { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply at irs.gov. You'll need this to hire crew members." },
+      { "order": 4, "title": "Get your local business tax receipt", "description": "Required in most Florida counties. Some counties also require a home occupation permit if operating from home." },
+      { "order": 5, "title": "Get liability and workers' comp insurance", "description": "Florida requires workers' comp with 4 or more employees. General liability of $500,000+ is standard for commercial contracts." },
+      { "order": 6, "title": "Purchase equipment", "description": "Florida-specific needs include equipment rated for tropical conditions. Budget $5,000-$12,000 for startup equipment." }
+    ],
+    "stateSpecificNotes": "Florida's 12-month growing season means consistent year-round revenue — unlike seasonal northern markets. No state contractor license is required for basic landscaping (unlike California). Hurricane cleanup creates seasonal revenue spikes."
+  }
+}

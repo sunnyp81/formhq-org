@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "general-liability",
+    "name": "General Liability Insurance",
+    "shortName": "General Liability",
+    "description": "Covers third-party bodily injury and property damage claims against your business",
+    "avgAnnualCost": [400, 1500],
+    "isTypicallyRequired": true
+  },
+  {
+    "slug": "workers-comp",
+    "name": "Workers' Compensation Insurance",
+    "shortName": "Workers' Comp",
+    "description": "Covers employee injuries and illnesses that occur on the job",
+    "avgAnnualCost": [800, 3000],
+    "isTypicallyRequired": true
+  },
+  {
+    "slug": "bonding",
+    "name": "Surety Bond",
+    "shortName": "Surety Bond",
+    "description": "Guarantees your business will fulfill contractual obligations to clients",
+    "avgAnnualCost": [100, 500],
+    "isTypicallyRequired": false
+  }
+]

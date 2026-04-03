@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "cleaning-business",
+    "name": "Cleaning Business",
+    "category": "Home Services",
+    "description": "Start a residential or commercial cleaning business with low startup costs and high demand",
+    "defaultInsuranceTypes": ["general-liability", "workers-comp", "bonding"],
+    "startupCostRange": [2000, 10000],
+    "iconKey": "cleaning"
+  },
+  {
+    "slug": "landscaping-business",
+    "name": "Landscaping Business",
+    "category": "Home Services",
+    "description": "Launch a landscaping and lawn care company serving residential and commercial clients",
+    "defaultInsuranceTypes": ["general-liability", "workers-comp", "commercial-auto"],
+    "startupCostRange": [5000, 25000],
+    "iconKey": "landscaping"
+  }
+]
