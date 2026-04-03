@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const businessState = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/business-state' }),
   schema: z.object({
     businessType: z.string(),
     state: z.string(),
