@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
@@ -11,7 +11,9 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     react(),
-    tailwind(),
     sitemap(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
