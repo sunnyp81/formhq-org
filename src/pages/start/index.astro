@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import BusinessTypeGrid from '../../components/navigation/BusinessTypeGrid.astro';
+import { canonicalUrl, webPageSchema } from '../../lib/seo';
+
+const title = 'Start a Business — Choose Your Business Type';
+const description = 'Browse business types and find step-by-step guides for starting your business, including LLC formation, licensing, insurance, and costs by state.';
+const url = canonicalUrl('/start');
+const schemas = [webPageSchema(title, description, url)];
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Start a Business', href: '/start/' },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1 class="text-4xl font-bold mb-4">Start a Business</h1>
+    <p class="text-lg text-gray-600 mb-8">Choose your business type to see state-by-state requirements, costs, and formation guides.</p>
+    <BusinessTypeGrid />
+  </div>
+</BaseLayout>

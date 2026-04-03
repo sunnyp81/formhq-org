@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getAllBusinessTypes, getAllInsuranceTypes, formatCostRange } from '../../lib/data';
+import { canonicalUrl, webPageSchema } from '../../lib/seo';
+
+const title = 'Business Insurance — Coverage Guides & Free Quotes';
+const description = 'Find the right insurance for your business. Compare coverage types, understand state requirements, and get free quotes from top commercial insurers.';
+const url = canonicalUrl('/insurance');
+const schemas = [webPageSchema(title, description, url)];
+const businessTypes = getAllBusinessTypes();
+const insuranceTypes = getAllInsuranceTypes();
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Insurance', href: '/insurance/' },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1 class="text-4xl font-bold mb-4">Business Insurance</h1>
+    <p class="text-lg text-gray-600 mb-8">Find the right coverage for your business type and state.</p>
+
+    <section class="my-10">
+      <h2 class="text-2xl font-bold mb-6">Insurance Types</h2>
+      <div class="space-y-4">
+        {insuranceTypes.map((ins) => (
+          <div class="p-4 border border-gray-200 rounded-lg">
+            <h3 class="font-semibold text-lg">{ins.name}</h3>
+            <p class="text-gray-600 text-sm mt-1">{ins.description}</p>
+            <p class="text-sm mt-2">
+              <span class="font-medium">Average annual cost:</span>
+              <span class="text-primary-700"> {formatCostRange(ins.avgAnnualCost)}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="my-10">
+      <h2 class="text-2xl font-bold mb-6">Insurance by Business Type</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {businessTypes.map((bt) => (
+          <li>
+            <a href={`/start/${bt.slug}/`} class="block p-4 rounded-lg border border-gray-200 hover:border-primary-300 transition-colors">
+              <span class="font-medium text-primary-700">{bt.name} Insurance</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

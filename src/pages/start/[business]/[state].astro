@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../../components/layout/BaseLayout.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import StepsBlock from '../../../components/content/StepsBlock.astro';
+import CostBreakdown from '../../../components/content/CostBreakdown.astro';
+import TopPickCard from '../../../components/conversion/TopPickCard.astro';
+import InsuranceCTA from '../../../components/conversion/InsuranceCTA.astro';
+import RelatedLinks from '../../../components/navigation/RelatedLinks.astro';
+import { getBusinessStatePairs } from '../../../lib/data';
+import {
+  stateSpokeTitle,
+  stateSpokeDescription,
+  canonicalUrl,
+  webPageSchema,
+  howToSchema,
+} from '../../../lib/seo';
+import type { BusinessType, State, BusinessStateEntry } from '../../../lib/data';
+
+export function getStaticPaths() {
+  return getBusinessStatePairs().map(({ business, state, data }) => ({
+    params: { business: business.slug, state: state.slug },
+    props: { business, state, data },
+  }));
+}
+
+interface Props {
+  business: BusinessType;
+  state: State;
+  data: BusinessStateEntry | undefined;
+}
+
+const { business, state, data } = Astro.props;
+
+const title = stateSpokeTitle(business, state);
+const description = stateSpokeDescription(business, state, data?.estimatedTotalCost);
+const url = canonicalUrl(`/start/${business.slug}/${state.slug}`);
+
+const schemas = [webPageSchema(title, description, url)];
+
+if (data?.steps) {
+  schemas.push(
+    howToSchema(
+      `How to Start a ${business.name} in ${state.name}`,
+      description,
+      data.steps,
+      data.estimatedTotalCost,
+    )
+  );
+}
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Start a Business', href: '/start/' },
+  { label: business.name, href: `/start/${business.slug}/` },
+  { label: state.name, href: `/start/${business.slug}/${state.slug}/` },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Everything you need to start a {business.name.toLowerCase()} in {state.name}, including LLC formation, licensing, insurance requirements, and estimated costs.
+    </p>
+
+    {data?.stateSpecificNotes && (
+      <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-8">
+        <p class="text-blue-800">{data.stateSpecificNotes}</p>
+      </div>
+    )}
+
+    {data?.specificLicenses && (
+      <section class="my-10">
+        <h2 class="text-2xl font-bold mb-4">Licenses & Permits in {state.name}</h2>
+        <ul class="space-y-2">
+          {data.specificLicenses.map((license) => (
+            <li class="flex items-start gap-2">
+              <span class="text-primary-500 mt-1">&#8226;</span>
+              <span>{license}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {data?.steps && (
+      <StepsBlock steps={data.steps} title={`Steps to Start a ${business.name} in ${state.name}`} />
+    )}
+
+    <TopPickCard state={state} />
+
+    <CostBreakdown business={business} state={state} data={data} />
+
+    <InsuranceCTA business={business} state={state} />
+
+    <section class="my-10">
+      <h2 class="text-2xl font-bold mb-4">Form Your LLC in {state.name}</h2>
+      <p class="text-gray-600 mb-4">
+        Most {business.name.toLowerCase()} owners in {state.name} choose an LLC for liability protection and tax flexibility.
+        The filing fee is ${state.llcFilingFee} with the {state.sosName}.
+        {state.requiresRegisteredAgent ? ' A registered agent is required.' : ''}
+      </p>
+      <a href={`/llc/${state.slug}/`} class="text-primary-600 font-medium hover:underline">
+        Complete guide to forming an LLC in {state.name} &rarr;
+      </a>
+    </section>
+
+    <RelatedLinks business={business} state={state} pageType="state-spoke" />
+  </article>
+</BaseLayout>

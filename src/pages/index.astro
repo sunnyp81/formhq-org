@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { getAllBusinessTypes, getAllStates } from '../lib/data';
+import { canonicalUrl, webPageSchema } from '../lib/seo';
+
+const businessTypes = getAllBusinessTypes();
+const states = getAllStates();
+const title = 'Business Formation Guide — Start Your Business the Right Way';
+const description = 'Step-by-step guides to start a business, form an LLC, and get commercial insurance in all 50 states. Compare the best LLC formation services.';
+const url = canonicalUrl('/');
+const schemas = [webPageSchema(title, description, url)];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
+  <section class="bg-primary-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Start Your Business the Right Way</h1>
+      <p class="text-xl text-primary-100 mb-8">Step-by-step guides for LLC formation, licensing, and insurance across all 50 states.</p>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">Popular Business Types</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {businessTypes.map((bt) => (
+        <a href={`/start/${bt.slug}/`} class="block p-6 rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+          <h3 class="font-semibold text-lg text-primary-700">{bt.name}</h3>
+          <p class="text-sm text-gray-500 mt-2">{bt.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">Form an LLC by State</h2>
+    <nav aria-label="Select a state for LLC formation">
+      <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        {states.map((s) => (
+          <li>
+            <a href={`/llc/${s.slug}/`} class="block px-3 py-2 text-sm rounded-md border border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-colors">
+              {s.name} ({s.abbr})
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>

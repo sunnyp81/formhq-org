@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import StateGrid from '../../components/navigation/StateGrid.astro';
+import { getAllBusinessTypes, formatCostRange, getInsuranceTypesForBusiness, getAllStates } from '../../lib/data';
+import {
+  businessHubTitle,
+  businessHubDescription,
+  canonicalUrl,
+  webPageSchema,
+  itemListSchema,
+} from '../../lib/seo';
+import type { BusinessType } from '../../lib/data';
+
+export function getStaticPaths() {
+  return getAllBusinessTypes().map((business) => ({
+    params: { business: business.slug },
+    props: { business },
+  }));
+}
+
+interface Props {
+  business: BusinessType;
+}
+
+const { business } = Astro.props;
+const title = businessHubTitle(business);
+const description = businessHubDescription(business);
+const url = canonicalUrl(`/start/${business.slug}`);
+const states = getAllStates();
+const insuranceTypes = getInsuranceTypesForBusiness(business);
+
+const stateListItems = states.map((s) => ({
+  name: `${business.name} in ${s.name}`,
+  url: canonicalUrl(`/start/${business.slug}/${s.slug}`),
+}));
+
+const schemas = [
+  webPageSchema(title, description, url),
+  itemListSchema(`How to Start a ${business.name} by State`, stateListItems),
+];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Start a Business', href: '/start/' },
+  { label: business.name, href: `/start/${business.slug}/` },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <p class="text-lg text-gray-600 mb-8">{business.description}. Estimated startup costs: {formatCostRange(business.startupCostRange)}.</p>
+
+    <section class="my-10">
+      <h2 class="text-2xl font-bold mb-4">Insurance You'll Need</h2>
+      <ul class="space-y-3">
+        {insuranceTypes.map((ins) => (
+          <li class="flex items-start gap-2">
+            <span class="text-accent-500 mt-1">&#10003;</span>
+            <div>
+              <span class="font-medium">{ins.name}</span>
+              <span class="text-sm text-gray-500"> — {ins.description}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <StateGrid business={business} />
+  </article>
+</BaseLayout>

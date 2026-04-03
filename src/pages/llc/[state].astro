@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import PricingTable from '../../components/conversion/PricingTable.astro';
+import FAQBlock from '../../components/content/FAQBlock.astro';
+import BusinessTypeGrid from '../../components/navigation/BusinessTypeGrid.astro';
+import RelatedLinks from '../../components/navigation/RelatedLinks.astro';
+import { getAllStates, formatCurrency } from '../../lib/data';
+import {
+  llcSpokeTitle,
+  llcSpokeDescription,
+  canonicalUrl,
+  webPageSchema,
+  howToSchema,
+} from '../../lib/seo';
+import type { State } from '../../lib/data';
+
+export function getStaticPaths() {
+  return getAllStates().map((state) => ({
+    params: { state: state.slug },
+    props: { state },
+  }));
+}
+
+interface Props {
+  state: State;
+}
+
+const { state } = Astro.props;
+const title = llcSpokeTitle(state);
+const description = llcSpokeDescription(state);
+const url = canonicalUrl(`/llc/${state.slug}`);
+
+const llcSteps = [
+  { order: 1, title: 'Choose a name for your LLC', description: `Your LLC name must be unique in ${state.name}. Check availability on the ${state.sosName} website. The name must include "LLC" or "Limited Liability Company."` },
+  { order: 2, title: 'Appoint a registered agent', description: `${state.name} ${state.requiresRegisteredAgent ? 'requires' : 'recommends'} a registered agent with a physical address in the state to receive legal documents on behalf of your LLC.` },
+  { order: 3, title: 'File your Articles of Organization', description: `File with the ${state.sosName}. The filing fee is ${formatCurrency(state.llcFilingFee)}. Most states allow online filing.` },
+  { order: 4, title: 'Create an operating agreement', description: 'An operating agreement outlines ownership structure, member roles, and profit distribution. Not always legally required, but strongly recommended.' },
+  { order: 5, title: 'Get an EIN from the IRS', description: 'Apply for a free Employer Identification Number at irs.gov. Required for taxes, hiring employees, and opening a business bank account.' },
+  { order: 6, title: 'Open a business bank account', description: 'Separate personal and business finances to maintain your LLC liability protection. Bring your Articles of Organization and EIN.' },
+];
+
+const schemas = [
+  webPageSchema(title, description, url),
+  howToSchema(`How to Form an LLC in ${state.name}`, description, llcSteps, [state.llcFilingFee, state.llcFilingFee + 300]),
+];
+
+const faqs = [
+  {
+    question: `How much does it cost to form an LLC in ${state.name}?`,
+    answer: `The state filing fee is ${formatCurrency(state.llcFilingFee)}. ${state.annualReportFee > 0 ? `There is also an annual report fee of ${formatCurrency(state.annualReportFee)}.` : `${state.name} does not charge an annual report fee.`} Using a formation service adds $0-$200+ depending on the package.`,
+  },
+  {
+    question: `Do I need a registered agent in ${state.name}?`,
+    answer: `${state.requiresRegisteredAgent ? 'Yes' : 'It is recommended but not always required'}. A registered agent must have a physical address in ${state.name} and be available during business hours to receive legal documents.`,
+  },
+  {
+    question: `Does ${state.name} have a state income tax?`,
+    answer: `${state.hasStateIncomeTax ? `Yes, ${state.name} has a state income tax that applies to LLC income.` : `No, ${state.name} does not have a state income tax, which is a significant advantage for LLC owners.`}`,
+  },
+  {
+    question: `How long does it take to form an LLC in ${state.name}?`,
+    answer: `Processing times vary, but most ${state.name} LLC filings are completed within 1-2 weeks for standard processing. Expedited processing is usually available for an additional fee.`,
+  },
+];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Form an LLC', href: '/llc/' },
+  { label: state.name, href: `/llc/${state.slug}/` },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Form your LLC in {state.name} for as little as {formatCurrency(state.llcFilingFee)} (state filing fee).
+      {!state.hasStateIncomeTax && ` ${state.name} has no state income tax.`}
+      {state.requiresRegisteredAgent && ' A registered agent is required.'}
+    </p>
+
+    <section class="my-10 p-6 bg-gray-50 rounded-lg">
+      <h2 class="text-2xl font-bold mb-4">{state.name} LLC at a Glance</h2>
+      <dl class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
+        <div>
+          <dt class="text-gray-500">Filing Fee</dt>
+          <dd class="font-bold text-lg text-primary-700">{formatCurrency(state.llcFilingFee)}</dd>
+        </div>
+        <div>
+          <dt class="text-gray-500">Annual Fee</dt>
+          <dd class="font-bold text-lg text-primary-700">{state.annualReportFee > 0 ? formatCurrency(state.annualReportFee) : 'None'}</dd>
+        </div>
+        <div>
+          <dt class="text-gray-500">State Income Tax</dt>
+          <dd class="font-bold text-lg text-primary-700">{state.hasStateIncomeTax ? 'Yes' : 'None'}</dd>
+        </div>
+        <div>
+          <dt class="text-gray-500">Registered Agent</dt>
+          <dd class="font-bold text-lg text-primary-700">{state.requiresRegisteredAgent ? 'Required' : 'Optional'}</dd>
+        </div>
+        <div>
+          <dt class="text-gray-500">Filing Office</dt>
+          <dd class="font-bold text-sm">{state.sosName}</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="my-10">
+      <h2 class="text-2xl font-bold mb-6">How to Form an LLC in {state.name}</h2>
+      <ol class="space-y-6">
+        {llcSteps.map((step) => (
+          <li class="flex gap-4">
+            <span class="shrink-0 w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-sm">
+              {step.order}
+            </span>
+            <div>
+              <h3 class="font-semibold text-lg">{step.title}</h3>
+              <p class="text-gray-600 mt-1">{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <PricingTable state={state} />
+
+    <FAQBlock faqs={faqs} />
+
+    <BusinessTypeGrid state={state} />
+
+    <RelatedLinks state={state} pageType="llc-spoke" />
+  </article>
+</BaseLayout>
