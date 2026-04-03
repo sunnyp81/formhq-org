@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://formhq.org',
   output: 'static',
   adapter: cloudflare(),
   trailingSlash: 'always',

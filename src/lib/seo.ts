@@ -38,7 +38,7 @@ export function llcSpokeDescription(state: State): string {
 }
 
 export function canonicalUrl(path: string): string {
-  const base = 'https://example.com';
+  const base = 'https://formhq.org';
   const cleanPath = path.endsWith('/') ? path : `${path}/`;
   return `${base}${cleanPath}`;
 }
