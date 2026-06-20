@@ -4,3 +4,16 @@ dist/
 .wrangler/
 .env
 .env.local
+
+# leak-scan: appended 2026-05-01
+.env.*
+.env.production
+*.pem
+*.key
+credentials.json
+credentials*.json
+secrets.*
+.vercel/
+.next/cache/
+wordpress-config.md
+master-builds.md
