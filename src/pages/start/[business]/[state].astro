@@ -6,13 +6,15 @@ import CostBreakdown from '../../../components/content/CostBreakdown.astro';
 import TopPickCard from '../../../components/conversion/TopPickCard.astro';
 import InsuranceCTA from '../../../components/conversion/InsuranceCTA.astro';
 import RelatedLinks from '../../../components/navigation/RelatedLinks.astro';
-import { getBusinessStatePairs } from '../../../lib/data';
+import FAQBlock from '../../../components/content/FAQBlock.astro';
+import { getBusinessStatePairs, formatCurrency, formatCostRange } from '../../../lib/data';
 import {
   stateSpokeTitle,
   stateSpokeDescription,
   canonicalUrl,
   webPageSchema,
   howToSchema,
+  faqSchema,
 } from '../../../lib/seo';
 import type { BusinessType, State, BusinessStateEntry } from '../../../lib/data';
 
@@ -54,6 +56,27 @@ const breadcrumbs = [
   { label: business.name, href: `/start/${business.slug}/` },
   { label: state.name, href: `/start/${business.slug}/${state.slug}/` },
 ];
+
+const totalCost = data?.estimatedTotalCost ? formatCostRange(data.estimatedTotalCost) : formatCostRange(business.startupCostRange);
+
+const faqs = [
+  {
+    question: `How much does it cost to start a ${business.name.toLowerCase()} in ${state.name}?`,
+    answer: `Total startup costs typically run ${totalCost}, which includes the ${state.name} LLC filing fee of ${formatCurrency(state.llcFilingFee)}, licensing, insurance, and initial equipment.`,
+  },
+  {
+    question: `Do I need an LLC to start a ${business.name.toLowerCase()} in ${state.name}?`,
+    answer: `An LLC is not legally required, but it is the most common structure because it separates your personal assets from business liabilities. Filing with the ${state.sosName} costs ${formatCurrency(state.llcFilingFee)}.`,
+  },
+  {
+    question: `What licenses do I need for a ${business.name.toLowerCase()} in ${state.name}?`,
+    answer: data?.specificLicenses?.length
+      ? `${state.name} requirements include: ${data.specificLicenses.join(', ')}.`
+      : `Requirements vary by county and city in ${state.name}. Check with your local business licensing office before you start trading.`,
+  },
+];
+
+schemas.push(faqSchema(faqs));
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={url} schemas={schemas}>
@@ -61,8 +84,11 @@ const breadcrumbs = [
     <Breadcrumbs items={breadcrumbs} />
 
     <h1 class="text-4xl font-bold mb-4">{title}</h1>
-    <p class="text-lg text-gray-600 mb-8">
+    <p class="text-lg text-gray-600 mb-4">
       Everything you need to start a {business.name.toLowerCase()} in {state.name}, including LLC formation, licensing, insurance requirements, and estimated costs.
+    </p>
+    <p class="text-base text-gray-700 mb-8">
+      Starting a {business.name.toLowerCase()} in {state.name} costs {totalCost} on average, covering the {formatCurrency(state.llcFilingFee)} LLC filing fee with the {state.sosName}, local licensing, and startup insurance.
     </p>
 
     {data?.stateSpecificNotes && (
@@ -106,6 +132,8 @@ const breadcrumbs = [
         Complete guide to forming an LLC in {state.name} &rarr;
       </a>
     </section>
+
+    <FAQBlock faqs={faqs} />
 
     <RelatedLinks business={business} state={state} pageType="state-spoke" />
   </article>

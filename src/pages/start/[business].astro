@@ -2,13 +2,15 @@
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import StateGrid from '../../components/navigation/StateGrid.astro';
-import { getAllBusinessTypes, formatCostRange, getInsuranceTypesForBusiness, getAllStates } from '../../lib/data';
+import FAQBlock from '../../components/content/FAQBlock.astro';
+import { getAllBusinessTypes, formatCostRange, formatCurrency, getInsuranceTypesForBusiness, getAllStates } from '../../lib/data';
 import {
   businessHubTitle,
   businessHubDescription,
   canonicalUrl,
   webPageSchema,
   itemListSchema,
+  faqSchema,
 } from '../../lib/seo';
 import type { BusinessType } from '../../lib/data';
 
@@ -35,9 +37,27 @@ const stateListItems = states.map((s) => ({
   url: canonicalUrl(`/start/${business.slug}/${s.slug}`),
 }));
 
+const cheapestStates = [...states].sort((a, b) => a.llcFilingFee - b.llcFilingFee).slice(0, 3);
+
+const faqs = [
+  {
+    question: `How much does it cost to start a ${business.name.toLowerCase()}?`,
+    answer: `Total startup costs typically run ${formatCostRange(business.startupCostRange)}, covering LLC formation, licensing, insurance, and initial equipment. Costs vary by state, mainly due to the LLC filing fee and any state-specific license requirements.`,
+  },
+  {
+    question: `What are the main steps to start a ${business.name.toLowerCase()}?`,
+    answer: `Choose a business structure (most owners form an LLC for liability protection), register with your state's Secretary of State, get an EIN from the IRS, secure the insurance coverage listed below, then purchase equipment and open a business bank account.`,
+  },
+  {
+    question: `Which state is cheapest to start a ${business.name.toLowerCase()} in?`,
+    answer: `Among the states covered here, ${cheapestStates.map((s) => `${s.name} (${formatCurrency(s.llcFilingFee)} filing fee)`).join(', ')} have the lowest LLC filing fees.`,
+  },
+];
+
 const schemas = [
   webPageSchema(title, description, url),
   itemListSchema(`How to Start a ${business.name} by State`, stateListItems),
+  faqSchema(faqs),
 ];
 
 const breadcrumbs = [
@@ -52,7 +72,10 @@ const breadcrumbs = [
     <Breadcrumbs items={breadcrumbs} />
 
     <h1 class="text-4xl font-bold mb-4">{title}</h1>
-    <p class="text-lg text-gray-600 mb-8">{business.description}. Estimated startup costs: {formatCostRange(business.startupCostRange)}.</p>
+    <p class="text-lg text-gray-600 mb-4">{business.description}. Estimated startup costs: {formatCostRange(business.startupCostRange)}.</p>
+    <p class="text-base text-gray-700 mb-8">
+      To start a {business.name.toLowerCase()}, you register a business structure (usually an LLC), get an EIN from the IRS, secure the required insurance, and meet your state's licensing rules. Pick your state below for exact filing fees and step-by-step requirements.
+    </p>
 
     <section class="my-10">
       <h2 class="text-2xl font-bold mb-4">Insurance You'll Need</h2>
@@ -62,7 +85,7 @@ const breadcrumbs = [
             <span class="text-accent-500 mt-1">&#10003;</span>
             <div>
               <span class="font-medium">{ins.name}</span>
-              <span class="text-sm text-gray-500"> — {ins.description}</span>
+              <span class="text-sm text-gray-500">: {ins.description}</span>
             </div>
           </li>
         ))}
@@ -70,5 +93,7 @@ const breadcrumbs = [
     </section>
 
     <StateGrid business={business} />
+
+    <FAQBlock faqs={faqs} />
   </article>
 </BaseLayout>

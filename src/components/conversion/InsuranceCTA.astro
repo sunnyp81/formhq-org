@@ -18,7 +18,7 @@ const utmParams = `?utm_source=bizformation&utm_medium=cta&utm_campaign=${busine
     {insuranceTypes.slice(0, 3).map((ins) => (
       <li class="flex items-start gap-1">
         <span class="text-accent-600">&#10003;</span>
-        {ins.name} — {ins.description.toLowerCase()}
+        {ins.name}: {ins.description.toLowerCase()}
       </li>
     ))}
   </ul>

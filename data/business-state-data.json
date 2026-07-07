@@ -17,7 +17,7 @@
     "estimatedTotalCost": [1000, 4000],
     "steps": [
       { "order": 1, "title": "Choose your business structure", "description": "California LLCs offer strong liability protection. Note that California charges an $800 annual franchise tax regardless of income." },
-      { "order": 2, "title": "File with the California Secretary of State", "description": "File Articles of Organization with the CA SOS. The filing fee is $70 — one of the lowest in the nation." },
+      { "order": 2, "title": "File with the California Secretary of State", "description": "File Articles of Organization with the CA SOS. The filing fee is $70, one of the lowest in the nation." },
       { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply for a free Employer Identification Number at irs.gov. Required for taxes, banking, and hiring." },
       { "order": 4, "title": "Register with the California Franchise Tax Board", "description": "All California LLCs must register with the FTB and pay the $800 minimum franchise tax annually." },
       { "order": 5, "title": "Get your city business license", "description": "California requires a business license from your city or county. Fees and requirements vary by location." },
@@ -42,7 +42,7 @@
     "specificLicenses": ["Pesticide applicator license (if applying chemicals)", "Local permits for irrigation work"],
     "estimatedTotalCost": [3000, 15000],
     "steps": [
-      { "order": 1, "title": "Choose your business structure", "description": "An LLC protects your personal assets from landscaping liability claims — important given the physical nature of the work." },
+      { "order": 1, "title": "Choose your business structure", "description": "An LLC protects your personal assets from landscaping liability claims, important given the physical nature of the work." },
       { "order": 2, "title": "Register with the Texas Secretary of State", "description": "File a Certificate of Formation with the TX SOS. The filing fee is $300." },
       { "order": 3, "title": "Get your EIN from the IRS", "description": "Apply at irs.gov. Required for hiring employees, which most landscaping businesses do quickly." },
       { "order": 4, "title": "Get a pesticide applicator license", "description": "If you plan to apply herbicides or pesticides, you need a license from the Texas Department of Agriculture. Requires passing an exam." },
@@ -62,7 +62,7 @@
       { "order": 5, "title": "Get insurance", "description": "California requires $1,000,000 in general liability for licensed contractors. Workers' comp is mandatory if you have any employees." },
       { "order": 6, "title": "Purchase or lease equipment", "description": "Budget $10,000-$20,000 for professional-grade equipment. Water-efficient landscaping equipment is increasingly important due to California drought regulations." }
     ],
-    "stateSpecificNotes": "California's year-round growing season makes it the largest landscaping market in the US. The C-27 contractor license requirement is a significant barrier to entry — plan 4+ years of experience before applying. Drought-resistant landscaping (xeriscaping) is a growing niche."
+    "stateSpecificNotes": "California's year-round growing season makes it the largest landscaping market in the US. The C-27 contractor license requirement is a significant barrier to entry: plan 4+ years of experience before applying. Drought-resistant landscaping (xeriscaping) is a growing niche."
   },
   "landscaping-business:florida": {
     "specificLicenses": ["Limited certification for pest control (if applicable)", "Local business tax receipt"],
@@ -75,6 +75,6 @@
       { "order": 5, "title": "Get liability and workers' comp insurance", "description": "Florida requires workers' comp with 4 or more employees. General liability of $500,000+ is standard for commercial contracts." },
       { "order": 6, "title": "Purchase equipment", "description": "Florida-specific needs include equipment rated for tropical conditions. Budget $5,000-$12,000 for startup equipment." }
     ],
-    "stateSpecificNotes": "Florida's 12-month growing season means consistent year-round revenue — unlike seasonal northern markets. No state contractor license is required for basic landscaping (unlike California). Hurricane cleanup creates seasonal revenue spikes."
+    "stateSpecificNotes": "Florida's 12-month growing season means consistent year-round revenue, unlike seasonal northern markets. No state contractor license is required for basic landscaping (unlike California). Hurricane cleanup creates seasonal revenue spikes."
   }
 }
